@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   get 'admin/homes/top' => 'admin/homes#top'
   patch 'admin/order_details/:id' => 'admin/order_products#update'
 
-  devise_for :customers
+  devise_for :customers, controllers: {
+    sessions:      'customer_devises/sessions',
+    passwords:     'customer_devises/passwords',
+    registrations: 'customer_devises/registrations'
+  }
   namespace :customers do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :customers ,:only => [:show, :edit,:update]
@@ -19,7 +23,11 @@ Rails.application.routes.draw do
   resources :shippings, :only => [:index,:edit,:create,:update,:destroy]
   end
 
-  devise_for :admins
+  devise_for :admins, controllers: {
+    sessions:      'admin_devises/sessions',
+    passwords:     'admin_devises/passwords',
+    registrations: 'admin_devises/registrations'
+  }
   namespace :admin do
   resources :products, :only => [:index,:show,:new,:create,:edit,:update]
   resources :genres, :only => [:index,:create,:edit,:show,:update]
