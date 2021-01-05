@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'customers/homes#home'
-  get 'about' => 'homes#about'
+  get 'home/about' => 'customers/homes#about'
 
   devise_for :customers
   namespace :customers do
