@@ -1,2 +1,2 @@
-class SessionsController < ApplicationController
+class Customers::SessionsController < ApplicationController
 end
