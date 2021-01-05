@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   delete 'cart_items/destroy_all' => 'customers/cart_items#destroy_all'
   post 'orders/comfilm' => 'customers/orders#comfilm'
   get 'orders/complete' => 'customers/orders#complete'
-  get 'admin/homes/top' => 'admin/homes#top'
-  patch 'admin/order_details/:id' => 'admin/order_products#update'
+  get 'admins/homes/top' => 'admins/homes#top'
+  patch 'admins/order_details/:id' => 'admins/order_products#update'
 
   devise_for :customers, controllers: {
     sessions:      'customer_devises/sessions',
