@@ -1,4 +1,4 @@
-saki_ikeda
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,9 +8,19 @@ saki_ikeda
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+<body>
+<header>
+<%= link_to "About", home_about_path %>
 
-  <body>
-    <p>ああああああーーーー</p>
+<%= link_to "sign up", new_customer_registration_path %>
+
+<%= link_to "login", new_customer_session_path %>
+
+<%= link_to "logout", destroy_customer_session_path, method: :delete %>
+
+<%= link_to "product", customers_products_path %>
+</header>
+
     <%= yield %>
   </body>
 </html>
