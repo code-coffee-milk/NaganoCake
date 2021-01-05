@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
+ customers_controller
+ 
   test "should get index" do
     get products_index_url
     assert_response :success
@@ -31,4 +33,5 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+ develop
 end
