@@ -1,6 +1,6 @@
 class  Customers::ProductsController < ApplicationController
     
-def index
-end
+  def index
+  end
 
 end
