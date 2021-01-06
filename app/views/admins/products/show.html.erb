@@ -1,2 +1,12 @@
 <h1>Products#show</h1>
 <p>Find me in app/views/products/show.html.erb</p>
+  <p>画像</p>
+  <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg' %>
+  <td><p class=item>商品名：<%= @product.name %></p></td>
+  <td><p class=item>商品説明：<%= @product.introduction %></p></td>
+  <td><p class=item>価格：<%= @product.price %></p></td>
+
+  <td><button type="button" class="btn btn-outline-success"><%= link_to "編集する", edit_admins_product_path(@product) %></button></td>
+ 
+
+<%= link_to "管理者用商品一覧", admins_products_path %>

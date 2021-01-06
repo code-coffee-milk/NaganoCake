@@ -1,3 +1,19 @@
-aaaaaa
+<h2>商品</h2>
 
-customers products
+<table>
+<tr>
+<th>商品名</th>
+<th>価格</th>
+<th>ジャンル</th>
+<th>ステータス</th>
+</tr>
+
+<% @products.each do |product| %>
+
+<tr>
+<td><%= link_to customers_product_path(product.id) do %><%= product.name %><% end %></td>
+<td><%= product.price %></td>
+<td></td>
+<td></td>
+</tr>
+<% end %>
