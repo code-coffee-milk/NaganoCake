@@ -6,4 +6,7 @@ class Product < ApplicationRecord
 	has_many :order_details
 
 attachment :image
+
+validates :is_active, inclusion: { in: [true, false] }
+
 end

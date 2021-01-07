@@ -4,25 +4,23 @@
 <div class="container">
 <div class="row">
   <div class="col-xs-12">
+  <%= link_to "管理者用商品一覧", admins_products_path %>
   <p>画像</p>
-  <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg' %>
-  <td>商品名：<%= @product.name %></p></td>
-  <td>商品説明：<%= @product.introduction %></p></td>
-  <td>価格：<%= @product.price %></p></td>
-  <td>ジャンル<%= @product.genre.name %></td>
-  <td>
-　　<% if @product.is_active == true %>
-  <td class="genre-td"><i class="fas fa-bullseye red"></i>販売中</td>
-　　 <% elsif @product.is_active == false %>
-  <td class="genre-td"><i class="fas fa-bullseye blue"></i>販売停止中</td>
- 　　<% end %>
- </td>
-
-  <td><%= link_to "編集する", edit_admins_product_path(@product), class: "btn btn-info" %></td>
+  <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '100x100' %>
+  
+  <div>商品名：<%= @product.name %></div>
+  <div>商品説明：<%= @product.introduction %></div>
+  <div>価格：<%= @product.price %></div>
+  <div>ジャンル：<%= @product.genre.name %></div>
+ <div>
+ <% if @product.is_active == true %>
+  <i class="fas fa-bullseye red"></i>販売中
+ <% elsif @product.is_active == false %>
+  <i class="fas fa-bullseye blue"></i>販売停止中
+ <% end %>
+ </div>
+<%= link_to "編集する", edit_admins_product_path(@product), class: "btn btn-info" %>
  
-
-<%= link_to "管理者用商品一覧", admins_products_path %>
-
     </div>
   </div>
 </div>

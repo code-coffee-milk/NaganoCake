@@ -5,33 +5,29 @@
   <div class="col-xs-12">
 <%= form_with model: @product, url: admins_product_path, local: true do |f| %>
 
- <div class = "field">
-  <p>商品名</p>
+  <h4>商品名</h4>
   <%= f.text_field :name %>
- </div>
 
- <div class = "field">
-  <p>商品説明</p>
+  <h4>商品説明</h4>
   <%= f.text_area :introduction %>
- </div>
 
-    <h4>価格</h4>
-  <%= f.text_field :price %>
+ <h4>価格</h4>
+  <%= f.text_field :price %>円
 
   <h4>ジャンル</h4>
   <%= f.collection_select(:genre_id, @genres, :id, :name, prompt: "-- 選択してください --")  %>
   
-    <h4>販売ステータス</h4>
+  <h4>販売ステータス</h4>
    <%= f.radio_button :is_active, true %>
    <%= f.label :is_active, "販売中", {value: :true, style: "display: inline-block;"} %>
    <%= f.radio_button :is_active, false %>
    <%= f.label :is_active, "販売停止中", {value: :false, style: "display: inline-block;"} %>
+   
   <h4>画像</h4>
   <%= f.attachment_field :image %>
   
- <div class = "field">
   <%= f.submit '更新',class: 'btn btn-success' %>
- </div>
+
 <% end %>
     </div>
   </div>
