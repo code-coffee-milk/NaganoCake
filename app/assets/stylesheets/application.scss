@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+ @import 'font-awesome-sprockets';
+ @import 'font-awesome';
+
+.sing-up-label {
+  width: 200px;
+}
+
+.sign-up-input-label {
+  width: 64px;
+}
+
+.sing-in-label {
+  width: 200px;
+}
+
+.new_customer {
+  display: flex;
+  justify-content: center;
+}
