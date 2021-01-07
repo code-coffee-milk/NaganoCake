@@ -1,11 +1,31 @@
-customers top!!!
+<div class="container">
+  <div class="row">
+    <div class="main-visual">
+      <%= image_tag 'cake.jpg', size: '1150x300', style: 'background-image'%>
+    </div>
+    <div class='mx-auto'>
+        <div class="home_text">
+          ようこそ、ながのCAKEへ！</br>
+          このサイトは、ケーキ販売のECサイトになります。</br>
+          会員でない方も商品の閲覧はできますが、</br>
+          購入には会員登録が必要になります。
+        </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to "About", home_about_path %>
-
-<%= link_to "sign up", new_customer_registration_path %>
-
-<%= link_to "login", new_customer_session_path %>
-
-<%= link_to "logout", destroy_customer_session_path, method: :delete %>
-
-<%= link_to "product", customers_products_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10">
+      <h4>新着商品</h4>
+      
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="offset-sm-8">
+    <p>
+      <%= link_to "全ての商品を見る＞", customers_products_path, class: 'btn btn-secondary'%>
+    </p>
+  </div>
+</div>
