@@ -49,5 +49,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise"
 
+<<<<<<< HEAD
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+=======
+gem "devise"
+gem 'bootstrap', '~> 4.5'
+gem 'jquery-rails'
+gem 'font-awesome-sass', '~> 5.13'
+>>>>>>> acdb802b8b8de076ceee875d2343e0f20ffb384d
