@@ -1,9 +1,13 @@
 <h1>管理者用 Products#index</h1>
-
+<div class="container">
+<div class="row">
+  <div class="col-xs-12">
 <%= link_to "商品新規投稿", new_admins_product_path %>
+<%= link_to "ジャンル一覧", admins_genres_path %>
 
 <table>
 <tr>
+<th>商品ID</th>   
 <th>商品名</th>
 <th>価格</th>
 <th>ジャンル</th>
@@ -13,9 +17,20 @@
 <% @products.each do |product| %>
 
 <tr>
+<td><%= product.id %></td>    
 <td><%= link_to admins_product_path(product.id) do %><%= product.name %><% end %></td>
 <td><%= product.price %></td>
-<td></td>
-<td></td>
+<td><%= product.genre.name %></td>
+<td>
+<% if product.is_active == true %>
+  <td class="genre-td"><i class="fas fa-bullseye red"></i>販売中</td>
+ <% elsif product.is_active == false %>
+  <td class="genre-td"><i class="fas fa-bullseye blue"></i>販売停止中</td>
+ <% end %>
+ </td>
 </tr>
+
 <% end %>
+    </div>
+  </div>
+</div>
