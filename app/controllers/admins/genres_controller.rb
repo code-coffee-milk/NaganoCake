@@ -17,22 +17,14 @@ class Admins::GenresController < ApplicationController
   def update
     @genre = Genre.find(params[:id])
     if @genre.update(genre_params)
-      redirect_to admins_genres_path
-      if @genre.is_active == false
-        @genre.products.each do |product|
-          product.is_active = false
-          product.save
-        end
-      end
-    else
-       render :edit and return
+    redirect_to admins_genres_path
     end
   end
 
   private
 
   def genre_params
-    params.require(:genre).permit(:name, :is_valid)
+    params.require(:genre).permit(:name, :is_active)
   end
 
 end
