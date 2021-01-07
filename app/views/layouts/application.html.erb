@@ -8,19 +8,36 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-<body>
-<header>
-<%= link_to "About", home_about_path %>
+  <body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a href="/"><%= image_tag 'logo.jpg', size: '150x100', class: "navbar-brand logo", alt: "ヘッダーロゴ" %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
 
-<%= link_to "sign up", new_customer_registration_path %>
+        <% if customer_signed_in? %>
+          <li><%= link_to "マイページ", customers_customer_path, class: 'btn btn-secondary' %></li>
+          <li><%= link_to "商品一覧", customers_products_path, class: 'btn btn-secondary' %></li>
+          <li><%= link_to "カート", customers_cart_items_path, class: 'btn btn-secondary' %></li>
+          <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'btn btn-secondary' %></li>
+        <% else %>
+          <li><%= link_to "About", home_about_path, class: 'btn btn-secondary' %></li>
+          <li><%= link_to "商品一覧", customers_products_path, class: 'btn btn-secondary' %></li>
+          <li><%= link_to "新規登録", new_customer_registration_path, class: 'btn btn-secondary' %></li>
+          <li><%= link_to "ログイン", new_customer_session_path, class: 'btn btn-secondary' %></li>
+        <% end %>
 
-<%= link_to "login", new_customer_session_path %>
+        </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-<%= link_to "logout", destroy_customer_session_path, method: :delete %>
+  <%= yield %>
 
-<%= link_to "product", customers_products_path %>
-</header>
-
-    <%= yield %>
   </body>
 </html>
