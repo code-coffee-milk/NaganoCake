@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'customers/homes#home'
   get 'home/about' => 'customers/homes#about'
   get 'customers/unsubscribe' => 'customers/customers#unsubscribe'
-  patch 'customers/withdraw' => 'customers/customers#withdraw'
+  patch 'customers/withdraw/:id' => 'customers/customers#withdraw' ,as:'customers_withdraw'
   delete 'cart_items/destroy_all' => 'customers/cart_items#destroy_all'
   post 'orders/comfirm' => 'customers/orders#comfirm'
   get 'orders/complete' => 'customers/orders#complete'
