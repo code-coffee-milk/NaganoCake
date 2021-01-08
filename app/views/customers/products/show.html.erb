@@ -1,7 +1,20 @@
 <h1>Products#show</h1>
 <p>Find me in app/views/products/show.html.erb</p>
-  <p>画像</p>
-  <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg' %>
-  <td><p class=item>商品名：<%= @product.name %></p></td>
-  <td><p class=item>商品説明：<%= @product.introduction %></p></td>
-  <td><p class=item>価格：<%= @product.price %></p></td>
+  
+<div class="container">
+ <div class="row">
+  <div class="col-xs-12">  
+  
+   <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '100x100', fallback: "sweets_colorful_cupcake_blue.png" %>
+  <p class=item>商品名：<%= @product.name %></p>
+  <p class=item>商品説明：<%= @product.introduction %></p>
+  <p class=item>価格：<%= @product.price %></p>
+  
+
+	</div>
+</div>
+
+  
+ </div>
+ </div>
+</div>
