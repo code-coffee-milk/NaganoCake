@@ -9,5 +9,10 @@ class Customer < ApplicationRecord
   validates :first_name_kana, presence: true
   validates :postal_code, format: { with: /\A\d{7}\z/ }
   validates :address, presence: true
-  validates :phone_number, format: { with: /\A\d{11}\z/}
+  validates :phone_number, format: { with: /\A\d{10,11}\z/}
+
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
+
 end
