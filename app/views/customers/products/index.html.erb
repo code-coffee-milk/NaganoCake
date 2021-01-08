@@ -1,19 +1,21 @@
-<h2>商品</h2>
-
-<table>
-<tr>
-<th>商品名</th>
-<th>価格</th>
-<th>ジャンル</th>
-<th>ステータス</th>
-</tr>
-
+<div class="container">
+ <div class="row">
+  <div class="col-xs-12"> 
+ <h2>商品一覧</h2>
+<div class="clearfix product-box">
 <% @products.each do |product| %>
 
-<tr>
-<td><%= link_to customers_product_path(product.id) do %><%= product.name %><% end %></td>
-<td><%= product.price %></td>
-<td></td>
-<td></td>
-</tr>
-<% end %>
+<%= link_to customers_product_path(product.id), class: "btn-link", :style=>"color:#0099FF;" do %>
+ <div id="img_field" class="product">
+  <%= attachment_image_tag(product, :image, size: "150x150", fallback: "sweets_colorful_cupcake_blue.png") %>
+ </div>
+ <p class="products-name"><%= product.name %></p>
+ <% end %>
+ <p class="products-price">￥<%= product.price %></p>
+ 
+ <% end %>
+ </div>
+ 
+ </div>
+ </div>
+</div>

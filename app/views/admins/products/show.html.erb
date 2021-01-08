@@ -6,7 +6,7 @@
   <div class="col-xs-12">
   <%= link_to "管理者用商品一覧", admins_products_path %>
   <p>画像</p>
-  <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '100x100' %>
+  <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '100x100', fallback: "sweets_colorful_cupcake_blue.png" %>
   
   <div>商品名：<%= @product.name %></div>
   <div>商品説明：<%= @product.introduction %></div>
