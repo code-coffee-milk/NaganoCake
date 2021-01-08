@@ -8,7 +8,8 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  
+
+
   <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -21,7 +22,7 @@
         <ul class="navbar-nav ml-auto">
 
         <% if customer_signed_in? %>
-          <li><%= link_to "マイページ", customers_customer_path(current_customer.id), class: 'btn btn-secondary' %></li>
+          <li><%= link_to "マイページ", customers_customer_path, class: 'btn btn-secondary' %></li>
           <li><%= link_to "商品一覧", customers_products_path, class: 'btn btn-secondary' %></li>
           <li><%= link_to "カート", customers_cart_items_path, class: 'btn btn-secondary' %></li>
           <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'btn btn-secondary' %></li>
