@@ -1,2 +1,26 @@
 <h1>Products#show</h1>
 <p>Find me in app/views/products/show.html.erb</p>
+
+<div class="container">
+<div class="row">
+  <div class="col-xs-12">
+  <%= link_to "管理者用商品一覧", admins_products_path %>
+  <p>画像</p>
+  <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '100x100' %>
+  
+  <div>商品名：<%= @product.name %></div>
+  <div>商品説明：<%= @product.introduction %></div>
+  <div>価格：<%= @product.price %></div>
+  <div>ジャンル：<%= @product.genre.name %></div>
+ <div>
+ <% if @product.is_active == true %>
+  <i class="fas fa-bullseye red"></i>販売中
+ <% elsif @product.is_active == false %>
+  <i class="fas fa-bullseye blue"></i>販売停止中
+ <% end %>
+ </div>
+<%= link_to "編集する", edit_admins_product_path(@product), class: "btn btn-info" %>
+ 
+    </div>
+  </div>
+</div>
