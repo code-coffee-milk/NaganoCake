@@ -9,14 +9,14 @@ class Customers::OrdersController < ApplicationController
 
   def new
   	@order = Order.new
-  	@shipping_addresses = ShippingAddress.where(customer: current_customer)
+  
 	end
 
-	def log
+	def comfirm
     @cart_items = current_cart
 		@order = Order.new(
       customer: current_customer,
-      payment_method: params[:order][:payment_method]
+      payment_method: params[:order][:method_of_payment]
     )
 
     # total_priceに請求額を代入
