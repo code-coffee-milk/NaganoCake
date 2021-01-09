@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :customers ,:only => [:show, :edit,:update]
   resources :products ,:only => [:show,:index]
-  resources :cart_items ,:only => [:index, :update, :create,:destroy]
+  resources :cart_items ,:only => [:index, :update, :create,:destroy]do
+      delete "all_destroy"
+  end
   resources :orders ,:only => [:index,:show,:new,:create]
   resources :shippings, :only => [:index,:edit,:create,:update,:destroy]
   end
