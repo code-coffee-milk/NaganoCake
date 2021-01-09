@@ -11,7 +11,7 @@
  </div>
  <p class="products-name"><%= product.name %></p>
  <% end %>
- <p class="products-price">￥<%= product.price %></p>
+ <p class="products-price">￥<%= product.price.to_s(:delimited) %></p>
  
  <% end %>
  </div>

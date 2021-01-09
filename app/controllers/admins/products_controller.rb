@@ -14,6 +14,7 @@ class Admins::ProductsController < ApplicationController
   def new
    @product = Product.new
    @genres = Genre.where(is_active: true)
+   
   end
 
   def create
