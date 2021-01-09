@@ -28,7 +28,7 @@ class Customers::OrdersController < ApplicationController
 
     # addressにshipping_addressesの値がはいっていれば
     elsif params[:order][:addresses] == "shipping_addresses"
-      ship = ShippingAddress.find(params[:order][:shipping_id])
+      ship = Shipping.find(params[:order][:shipping_id])
       @order.postal_code = ship.postal_code
       @order.address     = ship.address
       @order.name        = ship.name
@@ -42,7 +42,7 @@ class Customers::OrdersController < ApplicationController
 
       # バリデーションがあるならエラーメッセージを表示
       unless @order.valid? == true
-        @shipping_addresses = ShippingAddress.where(customer: current_customer)
+        @shipping = Shipping.where(customer: current_customer)
         render :new
       end
     end
@@ -56,7 +56,7 @@ class Customers::OrdersController < ApplicationController
 
     # もし情報入力でnew_addressの場合ShippingAddressに保存
     if params[:order][:ship] == "1"
-      current_customer.shipping_address.create(address_params)
+      current_customer.shipping.create(address_params)
     end
 
     # カート商品の情報を注文商品に移動
@@ -77,6 +77,7 @@ class Customers::OrdersController < ApplicationController
 	end
 
 	def index
+	  @orders = current_customer.orders
 	end
 
 	def show
@@ -87,7 +88,7 @@ class Customers::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:postal_code, :address, :name, :payment_method, :total_price)
+    params.require(:order).permit(:shipping_postal_code, :shipping_street_adress, :shipping_name, :payment_method, :total_price)
   end
 
   def address_params

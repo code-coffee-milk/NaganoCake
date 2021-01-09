@@ -1,2 +1,5 @@
 class OrderProduct < ApplicationRecord
+    
+
+
 end

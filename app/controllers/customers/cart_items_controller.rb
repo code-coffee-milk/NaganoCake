@@ -2,16 +2,16 @@ class Customers::CartItemsController < ApplicationController
   before_action :authenticate_customer!
   
   def index
-    @cart_items = current_customer
-    @cart_item = CartItem.new
+    @cart_items = current_customer.cart_items.all
   end
   
-  
   def create
-    if @cart_item.blank? 
-      @cart_item = CartItem.new(cart_item_params) 
-    end
+    @cart_item = current_customer.cart_items.find_by(product_id: params[:product_id])
+    if @cart_item.nil?
+    @cart_item = current_customer.cart_items.new(cart_item_params)
+    else 
     @cart_item.quantity += params[:quantity].to_i 
+    end
     @cart_item.save
     redirect_to customers_cart_items_path
   end
