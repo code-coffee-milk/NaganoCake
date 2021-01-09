@@ -16,7 +16,13 @@ end
 
   # protect_from_forgery with: :exception
  def after_sign_in_path_for(resource)
-   customers_products_path
+    # customers_products_path
+    case resource
+    when Admin
+      admins_products_path
+    when Customer
+      customers_products_path
+    end
  end
 
 # def after_log_in_path_for
