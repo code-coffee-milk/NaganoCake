@@ -15,4 +15,8 @@ class Customer < ApplicationRecord
     super && (self.is_deleted == false)
   end
 
+  def full_name
+    return self.last_name + ' ' + self.first_name
+  end
+
 end
