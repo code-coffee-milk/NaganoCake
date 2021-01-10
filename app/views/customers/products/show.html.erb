@@ -8,7 +8,7 @@
    <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '100x100', fallback: "sweets_colorful_cupcake_blue.png" %>
   <p class=item>商品名：<%= @product.name %></p>
   <p class=item>商品説明：<%= @product.introduction %></p>
-  <p class=item>価格：<%= @product.price %></p>
+  <p class=item>価格：<%= @product.price.to_s(:delimited) %></p>
   
 <div class="field">
         <% if @product.is_active == true %>

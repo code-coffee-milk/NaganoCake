@@ -1,5 +1,7 @@
 class Admins::ProductsController < ApplicationController
   
+  before_action :authenticate_admin!
+  
   def index
     @products = Product.all
   end
@@ -12,6 +14,7 @@ class Admins::ProductsController < ApplicationController
   def new
    @product = Product.new
    @genres = Genre.where(is_active: true)
+   
   end
 
   def create

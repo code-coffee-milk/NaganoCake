@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get 'customers/unsubscribe' => 'customers/customers#unsubscribe'
   patch 'customers/withdraw/:id' => 'customers/customers#withdraw' ,as:'customers_withdraw'
   delete 'cart_items/destroy_all' => 'customers/cart_items#destroy_all'
-  post 'orders/comfirm' => 'customers/orders#comfirm'
-  get 'orders/complete' => 'customers/orders#complete'
+  post 'customers/orders/comfirm' => 'customers/orders#comfirm'
+  get 'customers/orders/complete' => 'customers/orders#complete'
   get 'admins/homes/top' => 'admins/homes#top'
   patch 'admins/order_details/:id' => 'admins/order_products#update'
 
@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :customers ,:only => [:show, :edit,:update]
   resources :products ,:only => [:show,:index]
-  resources :cart_items ,:only => [:index, :update, :create,:destroy]
+  resources :cart_items ,:only => [:index, :update, :create,:destroy]do
+      delete "all_destroy"
+  end
   resources :orders ,:only => [:index,:show,:new,:create]
   resources :shippings, :only => [:index,:edit,:create,:update,:destroy]
   end
