@@ -3,48 +3,30 @@
 	
 <h2>注文履歴詳細</h2>  	
 
-    <div class="col-xs-12" >
-      <div class="col-xs-9">
-		<div class="field">
-		  <div class="col-xs-4">
-			購入者
-		  </div>
-		  <div class="col-xs-8">
-		    <%= @order.name %>
-		  </div>
-		</div>
+<h2>購入者</h2>
+    <%= @order.name %>
 
-	    <div class="field">
-	      <div class="col-xs-4">
-	        配送先
-	      </div>
-	      <div class="col-xs-8">
-	        <%= full_address(@order) %>
-	      </div>
-	    </div>
+ <h2>配送先</h2> 
+    <%= full_address(@order) %>
 
-	    <div class="field">
-	      <div class="col-xs-4">
-	        支払い方法
-	      </div>
-	      <div class="col-xs-8">
-	        <%= @order.method_of_payment %>
-	      </div>
-	    </div>
+<h2> 支払い方法</h2>
+   <%= @order.method_of_payment %>
 
- 	  <%= form_for(@order, url: admins_order_path, method: :patch) do |f| %>
- 	    <div>注文ステータス</div>
-      	  <div>
-            <%= f.select :status, Order.statuses.keys, class: "order_status" %>
-          </div>
+
+<%= form_for(@order, url: admins_order_path, method: :patch) do |f| %>
+  <h2>注文ステータス</h2>
+	  <div>
+      <%= f.select :status, Order.statuses.keys, class: "order_status" %>
+      </div>
 
       	<div class="actions">
-          <div class="col-xs-2"><%= f.submit '更新'  ,class: "btn btn-primary" %></div>
+          <div><%= f.submit '更新'  ,class: "btn btn-primary" %></div>
       	</div>
+      	
       <% end %>
       </div>
 
-	  <div class="buyer-order col-xs-9">
+	  <div class="buyer-order">
 			<table class="table table-hover table-bordered table-inverse">
 			    <thead>
 			        <tr class="info">
@@ -64,21 +46,13 @@
 	          	<% end %>
 				<% @order_details.each do |order_detail| %>
 					<tr>
-			            <td class="text-left">
-			              <%= order_product.product.name %>
-			            </td>
-			            <td class="text-right">
-			              ¥<%= purchase_price(order_product.product.price).to_s(:delimited) %>
-			            </td>
-			            <td class="text-right">
-			              <%= order_product.quantity %>
-			            </td>
-			            <td class="text-right">
-			              ¥<%= total_payment(order_product).to_s(:delimited) %>
-			            </td>
+			            <td> <%= order_product.product.name %> </td>
+			            <td> ¥<%= purchase_price(order_product.product.price).to_s(:delimited) %></td>
+			            <td><%= order_product.quantity %></td>
+			            <td> ¥<%= total_payment(order_product).to_s(:delimited) %> </td>
 			            <%= form_for(order_product, url: admin_order_products_path(order_product), method: :patch) do |f| %>
 			            <td>
-			            	<%= f.select :produciton_status, OrderDetail.produciton_statuses.keys, class: "order_status" %>
+			            	<%= f.select :status, OrderProduct.statuses.keys, class: "order_status" %>
 			            	<%= f.submit '更新'  ,class: "btn btn-warning" %>
 			            </td>
 			            <% end %>
