@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get 'customers/unsubscribe' => 'customers/customers#unsubscribe'
   patch 'customers/withdraw/:id' => 'customers/customers#withdraw' ,as:'customers_withdraw'
   delete 'cart_items/destroy_all' => 'customers/cart_items#destroy_all'
-  post 'orders/comfirm' => 'customers/orders#comfirm'
-  get 'orders/complete' => 'customers/orders#complete'
+  post 'customers/orders/comfirm' => 'customers/orders#comfirm'
+  get 'customers/orders/complete' => 'customers/orders#complete'
   get 'admins/homes/top' => 'admins/homes#top'
   patch 'admins/order_details/:id' => 'admins/order_products#update'
 

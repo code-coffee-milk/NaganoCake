@@ -2,15 +2,12 @@ class Customers::OrdersController < ApplicationController
 
     include ApplicationHelper
 
-  before_action :to_complete, only: [:show]
-  before_action :authenticate_customer!
-
   def new
    @order = Order.new
 	end
 
 	def comfirm
-    @cart_items = current_cart
+    @cart_items = current_customer.cart_items.all
 		@order = Order.new(
       customer: current_customer,
       payment_method: params[:order][:method_of_payment]
@@ -49,24 +46,26 @@ class Customers::OrdersController < ApplicationController
 	end
 
 	def create
-    order = Order.new(order_params)
+    @order = Order.new(order_params)
     @order.save
     flash[:notice] = "ご注文が確定しました。"
-    redirect_to complete_customers_orders_path
-
+    redirect_to customers_orders_comfirm_path
+  end
+  #注文確定したら、カート内を削除＋管理者の注文商品に一覧
+  def aa 
     # もし情報入力でnew_addressの場合ShippingAddressに保存
     if params[:order][:ship] == "1"
       current_customer.shipping.create(address_params)
     end
 
     # カート商品の情報を注文商品に移動
-    @cart_items = current_cart
+    @cart_items = current_customer.cart_items.all
     @cart_items.each do |cart_item|
     OrderProduct.create(
       product:  cart_item.product,
       order:    @order,
       quantity: cart_item.quantity,
-      subprice: sub_price(cart_item)
+      price: price(cart_item.product)
     )
     end
     # 注文完了後、カート商品を空にする

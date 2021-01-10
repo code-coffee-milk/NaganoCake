@@ -25,8 +25,8 @@
     		          <%= order.name %>
     		        </td>
     		        <td>
-    		          <% order.order_details.each do |order_detail| %>
-    		          	<%= order_detail.product.name %><br>
+    		          <% order.order_protects.each do |order_product| %>
+    		          	<%= order_product.product.name %><br>
     		          <% end %>
     		        </td>
     		        <td class="text-right">
@@ -43,7 +43,7 @@
           </tbody>
         </table>
       <% else %>
-        <p>注文履歴がありません。</p>[
+        <p>注文履歴がありません。</p>
       <% end %>
     </div>
 </div>

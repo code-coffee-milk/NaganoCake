@@ -23,9 +23,9 @@
     <tr>
       <td><%= attachment_image_tag cart_item.product, :image, format: "jpg", size: "80x80" %></td>
       <td><%= cart_item.product.name %></td>
-      <td><%= cart_item.product.price * 1.1 %></td>
+      <td><%= cart_item.product.price.to_s(:delimited) %></td>
       <td><%= cart_item.quantity %></td>
-      <td><%= cart_item.product.price %></td>
+      <td><%= (cart_item.product.price*cart_item.quantity).to_s(:delimited) %></td>
       <td><%=link_to "削除する", customers_cart_item_path(cart_item.id), class: "btn btn-danger", method: :delete, "data-confirm" => "削除しますか？" %></td>
     </tr>
     <% end %>
