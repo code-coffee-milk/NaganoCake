@@ -13,6 +13,7 @@ class Customer < ApplicationRecord
   validates :phone_number, format: { with: /\A\d{10,11}\z/}
 
   has_many :cart_items
+  has_many :orders
  
   def active_for_authentication?
     super && (self.is_deleted == false) end
