@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="row">
-    <h4 class="ml-3">ショッピングカート</h4>
+    <h4 class="ml-3 mt-3">ショッピングカート</h4>
     <div class="col-10 mx-auto">
 
 <% if current_customer.cart_items.present? %>
@@ -23,7 +23,7 @@
     <% @cart_items.each do |cart_item| %>
 
     <tr>
-      <td><%= attachment_image_tag cart_item.product, :image, format: "jpg", size: "80x80" %></td>
+      <td><%= attachment_image_tag cart_item.product, :image, :fill, 50, 50,format: "jpg", fallback: "sweets_colorful_cupcake_blue.png",size:'50x50'  %></td>
       <td><%= cart_item.product.name %></td>
       <td><%= cart_item.product.price.to_s(:delimited) %></td>
       <td>  <%= form_for(cart_item, url: customers_cart_item_path(cart_item), method: :patch, local: true) do |f| %>
@@ -40,20 +40,24 @@
 </div>
 
 
- <div class="row">
-     <div class="mx-auto">
-     <%= link_to "買い物を続ける", root_path, class: "btn btn-secondary" %>
-     </div>
-   <div class="col-4 mx-auto">
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <td "table-secondary">合計金額</td>
-          <td><%= @total_price.to_s(:delimited) %></td>
-        </tr>
-      </tbody>
-    </table>
-   </div>
+ <div class="row align-items-center mb-4">
+  <div class="col-10 mx-auto">
+    <div class="row align-items-center justify-content-between">
+      <div class="mt-3">
+       <%= link_to "買い物を続ける", customers_products_path, class: "btn btn-secondary" %>
+      </div>
+      <div class="col-4">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td "table-secondary">合計金額</td>
+            <td><%= @total_price.to_s(:delimited) %></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
  </div>
    <div class="row">
      <div class="col-6 mx-auto mb-1">
