@@ -3,16 +3,12 @@ class Customers::CartItemsController < ApplicationController
 
   def index
     @cart_items = current_customer.cart_items.all
-<<<<<<< HEAD
-    @total = total_price(@cart_items).to_s(:delimited)
-=======
     total_price = 0
     for cart_item in @cart_items do
       product = cart_item.product
       total_price += product.price * cart_item.quantity
     end
     @total_price = total_price
->>>>>>> 2a0a816791123c36b4cea957fc8c2acb3745396c
   end
 
   def create
