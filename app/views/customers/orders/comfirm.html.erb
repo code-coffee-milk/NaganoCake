@@ -1,56 +1,61 @@
 <div class="container">
-  <div class="row">
-    <h4 class="ml-3">ショッピングカート</h4>
-    <div class="col-10 mx-auto">
-
-      <% if current_customer.cart_items.present? %>
-<p class="text-right">
- <%= link_to "カートを空にする", cart_items_destroy_all_path, class:"btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
-<table class="table table-bordered">
-  <thead class="thead-light">
-    <tr>
-      <th></th>
-      <th>商品名</th>
-      <th>単価(税込)</th>
-      <th>数量</th>
-      <th>小計</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <% @cart_items.each do |cart_item| %>
-
-    <tr>
-      <td><%= attachment_image_tag cart_item.product, :image, format: "jpg", size: "80x80" %></td>
-      <td><%= cart_item.product.name %></td>
-      <td><%= cart_item.product.price.to_s(:delimited) %></td>
-      <td>  <%= form_for(cart_item, url: customers_cart_item_path(cart_item), method: :patch , local: true)do |f| %>
-    <%= f.number_field :quantity, class: "quantity", size: 10, min: 1, id: "quantity_cart" %>
-    <%= f.submit "変更", class: "btn btn-info" %>
-  <% end %></td>
-      <td><%= (cart_item.product.price*cart_item.quantity).to_s(:delimited) %></td>
-      <td><%=link_to "削除する", customers_cart_item_path(cart_item.id), class: "btn btn-danger", method: :delete, "data-confirm" => "削除しますか？" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <h3>注文情報確認</h3>
+    <div class="row">
+      <div style="width: 80%" class="pr-4">
+      	<table class="table table-bordered">
+      	  <thead>
+              <tr>
+                <th>商品名</th>
+                <th>単価（税込）</th>
+                <th>数量</th>
+                <th>小計</th>
+              </tr>
+             </thead>
+             <tbody>
+             	<% @cart_items.each do |cart_item| %>
+             	<tr>
+             	<td><%= attachment_image_tag cart_item.product, :image, :fill, 50, 50,format: "jpg", fallback: "sweets_colorful_cupcake_blue.png",size:'50x50'  %>
+             	    <%= cart_item.product.name %>
+             	</td>
+             	<td><%= cart_item.product.price.to_s(:delimited) %></td>
+             	<td><%= cart_item.quantity %></td>
+             	<td><%= (cart_item.product.price * cart_item.quantity).to_s(:delimited) %></td>
+             	</tr>
+             	<% end %>
+             </tbody>
+      	</table>
+    	</div>
+    	<div style="width: 20%" class="pl-4">
+      	<table class="table table-bordered">
+      	  <tr><th>送料</th><td>800</td></tr>
+          <tr><th>商品合計</th><td><%= @total_price.to_s(:delimited) %></td></tr>
+          <tr><th>請求金額</th><td><%= (800+@total_price).to_s(:delimited) %></td></tr>
+      	</table>
+    	</div>
+	</div>
+	    	<div class="row">
+    	    <h3>支払方法</h3>
+    	    <div>
+    	      <% if @order.method_of_payment == 0 %>
+    	        <p>クレジットカード</p>
+    	      <% elsif @order.method_of_payment == 1 %>
+    	        <p>銀行振込</p>
+    	      <% end %>
+    	    </div>
+    	  </div>
+    	  <div class="row">
+    	    <h3>お届け先</h3>
+    	    <div>
+    	      <%= @order.full_address %><br><%= @order.shipping_name %>
+    	    </div>
+    	  </div>
+    	  <div class="row">
+    	    <%= form_with model: @order, url: customers_orders_path, method: :post, local:true  do |f| %>
+    	      <%= f.hidden_field :shipping_street_adress, value: @order.shipping_street_adress %>
+    	      <%= f.hidden_field :shipping_postal_code, value: @order.shipping_postal_code %>
+    	      <%= f.hidden_field :method_of_payment, value: @order.method_of_payment %>
+    	      <%= f.hidden_field :shipping_name, value: @order.shipping_name %>
+    	      <%= f.submit "注文を確定する", class: "btn btn-success" %>
+    	    <% end %>
+    	  </div>
 </div>
-</div>
-
-
- <div class="row">
-     <div class="mx-auto">
-     <%= link_to "買い物を続ける", root_path, class:"btn btn-secondary" %>
-     </div>
-   <div class="col-4 mx-auto">
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <td "table-secondary">合計金額</td>
-          <td><%= @total_price.to_s(:delimited) %></td>
-        </tr>
-      </tbody>
-    </table>
-   </div>
- </div>
