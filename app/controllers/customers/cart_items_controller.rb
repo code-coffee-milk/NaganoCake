@@ -14,12 +14,16 @@ class Customers::CartItemsController < ApplicationController
   def create
     @cart_item = current_customer.cart_items.find_by(product_id: params[:product_id])
     if @cart_item.nil?
-    @cart_item = current_customer.cart_items.new(cart_item_params)
+      @cart_item = current_customer.cart_items.new(cart_item_params)
     else
-    @cart_item.quantity += params[:quantity].to_i
+      @cart_item.quantity += params[:quantity].to_i
     end
-    @cart_item.save
-    redirect_to customers_cart_items_path
+    if @cart_item.save
+      redirect_to customers_cart_items_path
+    else
+      @product = Product.find_by(id: @cart_item.product_id)
+      render 'customers/products/show'
+    end
   end
 
 
