@@ -8,13 +8,11 @@ class Admins::ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-
   end
 
   def new
    @product = Product.new
    @genres = Genre.where(is_active: true)
-   
   end
 
   def create

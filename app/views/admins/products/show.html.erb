@@ -1,26 +1,39 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
-
-<div class="container">
-<div class="row">
-  <div class="col-xs-12">
-  <%= link_to "管理者用商品一覧", admins_products_path %>
-  <p>画像</p>
-  <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '100x100', fallback: "sweets_colorful_cupcake_blue.png" %>
-  
-  <div>商品名：<%= @product.name %></div>
-  <div>商品説明：<%= @product.introduction %></div>
-  <div>価格：<%= @product.price %></div>
-  <div>ジャンル：<%= @product.genre.name %></div>
- <div>
- <% if @product.is_active == true %>
-  <i class="fas fa-bullseye red"></i>販売中
- <% elsif @product.is_active == false %>
-  <i class="fas fa-bullseye blue"></i>販売停止中
- <% end %>
- </div>
-<%= link_to "編集する", edit_admins_product_path(@product), class: "btn btn-info" %>
- 
-    </div>
+<div class="container mt-5">
+  <div class="row">
+    <h3 class="bg-light mb-5">商品詳細</h3>
   </div>
+ <div class="row">
+  <div class="col-md-5">
+   <%= attachment_image_tag @product, :image, size: "300x300", format: 'jpg', fallback: "sweets_colorful_cupcake_blue.png" %>
+  </div>
+  <div class="col-md-6 mt-5 ml-4">
+   <div>
+    <label>商品名：</label>
+    <%= @product.name %>
+   </div>
+   <div>
+    <label>商品説明：</label>
+    <%= @product.introduction %>
+   </div>
+   <div>
+    <label>ジャンル：</label>
+    <%= @product.genre.name %>
+   </div>
+   <div>
+    <label>価格：</label>
+    <%= @product.price %>
+   </div>
+   <div>
+    <label>販売ステータス：</label>
+    <% if @product.is_active == true %>
+      <i class="fas fa-bullseye red"></i>販売中
+    <% elsif @product.is_active == false %>
+      <i class="fas fa-bullseye blue"></i>販売停止中
+    <% end %>
+   </div>
+   <div class="mt-5">
+    <%= link_to "編集する", edit_admins_product_path(@product), class: "btn btn-success" %>
+   </div>
+  </div>
+ </div>
 </div>
