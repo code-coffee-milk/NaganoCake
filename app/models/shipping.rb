@@ -5,5 +5,5 @@ class Shipping < ApplicationRecord
     validates :address, presence: true
 
     belongs_to :customer
-
+    has_many :orders
 end

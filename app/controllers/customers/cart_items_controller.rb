@@ -3,7 +3,6 @@ class Customers::CartItemsController < ApplicationController
   
   def index
     @cart_items = current_customer.cart_items.all
-    
   end
   
   def create
@@ -34,9 +33,8 @@ class Customers::CartItemsController < ApplicationController
     redirect_to customers_cart_items_path 
   end
  
-  def all_destroy
-    @customer = current_customer
-    @cart_items = @customer.cart_items
+  def destroy_all
+    @cart_items = current_customer.cart_items
     @cart_items.destroy_all
     redirect_to customers_cart_items_path
   end
