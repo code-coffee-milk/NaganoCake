@@ -3,6 +3,7 @@ class Customers::CartItemsController < ApplicationController
   
   def index
     @cart_items = current_customer.cart_items.all
+    @total = total_price(@cart_items).to_s(:delimited)
   end
   
   def create
