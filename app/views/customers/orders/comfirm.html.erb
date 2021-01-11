@@ -1,85 +1,56 @@
 <div class="container">
-<div class="row">
-	
-<h2>注文履歴詳細</h2>  	
+  <div class="row">
+    <h4 class="ml-3">ショッピングカート</h4>
+    <div class="col-10 mx-auto">
 
-<h2>購入者</h2>
-    <%= @order.name %>
+      <% if current_customer.cart_items.present? %>
+<p class="text-right">
+ <%= link_to "カートを空にする", cart_items_destroy_all_path, class:"btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th></th>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
 
- <h2>配送先</h2> 
-    <%= full_address(@order) %>
+    <% @cart_items.each do |cart_item| %>
 
-<h2> 支払い方法</h2>
-   <%= @order.method_of_payment %>
+    <tr>
+      <td><%= attachment_image_tag cart_item.product, :image, format: "jpg", size: "80x80" %></td>
+      <td><%= cart_item.product.name %></td>
+      <td><%= cart_item.product.price.to_s(:delimited) %></td>
+      <td>  <%= form_for(cart_item, url: customers_cart_item_path(cart_item), method: :patch , local: true)do |f| %>
+    <%= f.number_field :quantity, class: "quantity", size: 10, min: 1, id: "quantity_cart" %>
+    <%= f.submit "変更", class: "btn btn-info" %>
+  <% end %></td>
+      <td><%= (cart_item.product.price*cart_item.quantity).to_s(:delimited) %></td>
+      <td><%=link_to "削除する", customers_cart_item_path(cart_item.id), class: "btn btn-danger", method: :delete, "data-confirm" => "削除しますか？" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
 
 
-<%= form_for(@order, url: admins_order_path, method: :patch) do |f| %>
-  <h2>注文ステータス</h2>
-	  <div>
-      <%= f.select :status, Order.statuses.keys, class: "order_status" %>
-      </div>
-
-      	<div class="actions">
-          <div><%= f.submit '更新'  ,class: "btn btn-primary" %></div>
-      	</div>
-      	
-      <% end %>
-      </div>
-
-	  <div class="buyer-order">
-			<table class="table table-hover table-bordered table-inverse">
-			    <thead>
-			        <tr class="info">
-			          <th>商品名</th>
-			          <th>単価（税込）</th>
-			          <th>数量</th>
-			          <th>小計</th>
-			          <th>製作ステータス</th>
-
-			        </tr>
-			    </thead>
-				<tbody>
-				<% if flash[:notice] %>
-		          	<div class="flash">
-		             <%= flash[:notice] %>
-		          	</div>
-	          	<% end %>
-				<% @order_details.each do |order_detail| %>
-					<tr>
-			            <td> <%= order_product.product.name %> </td>
-			            <td> ¥<%= purchase_price(order_product.product.price).to_s(:delimited) %></td>
-			            <td><%= order_product.quantity %></td>
-			            <td> ¥<%= total_payment(order_product).to_s(:delimited) %> </td>
-			            <%= form_for(order_product, url: admin_order_products_path(order_product), method: :patch) do |f| %>
-			            <td>
-			            	<%= f.select :status, OrderProduct.statuses.keys, class: "order_status" %>
-			            	<%= f.submit '更新'  ,class: "btn btn-warning" %>
-			            </td>
-			            <% end %>
-			      	</tr>
-				<% end %>
-				</tbody>
-			</table>
-	  </div>
-
-	  <div class="col-xs-3  billing">
-			<table class="table table-hover table-bordered table-condensed">
-				<tr>
-            		<th class="info">商品合計</th>
-					<td>¥<%= total_payment(@order_details).to_s(:delimited) %></td>
-				</tr>
-				<tr>
-					<th class="info">送料</th>
-					<td>¥<%= @order.shipping_fee.to_s(:delimited) %></td>
-				</tr>
-				<tr>
-					<th class="info">請求金額合計</th>
-					<td>¥<%= @order.total_payment.to_s(:delimited) %></td>
-				</tr>
-		    </table>
-	  </div>
-    <div class="col-xs-12">
-      <%= link_to "戻る", admin_orders_path, class: "glyphicon glyphicon-home btn btn-info" %>
-    </div>
-	  </div>
-  </div>
+ <div class="row">
+     <div class="mx-auto">
+     <%= link_to "買い物を続ける", root_path, class:"btn btn-secondary" %>
+     </div>
+   <div class="col-4 mx-auto">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td "table-secondary">合計金額</td>
+          <td><%= @total_price.to_s(:delimited) %></td>
+        </tr>
+      </tbody>
+    </table>
+   </div>
+ </div>

@@ -4,14 +4,19 @@ class Customers::OrdersController < ApplicationController
 
   def new
     @order = Order.all
-    @shippings = Shipping.all
+    @shippings = Shipping.where(customer: current_customer)
   end
 
   def create
   @order = current_customer.orders.new(order_params)
   @order.save
-  
-  @cart_items = current_customer.cart_items.all
+  redirect_to customers_orders_comfirm_path
+  end
+
+  def comfirm
+	  @order = Order.find(params[:id])
+    @order_products = @order.order_products
+      @cart_items = current_customer.cart_items.all
       @cart_items.each do |cart_item|
         @order_products = @order.order_products.new
         @order_products.product_id = cart_item.product.id
@@ -19,13 +24,7 @@ class Customers::OrdersController < ApplicationController
         @order_products.quantity = cart_item.quantity
         @order_products.save
         current_customer.cart_items.destroy_all
-      end
-  redirect_to customers_orders_comfirm_path
-  end
-
-  def comfirm
-	  @order = Order.find(params[:id])
-    @order_products = @order.order_products
+    end
   end
 
 	def complete
