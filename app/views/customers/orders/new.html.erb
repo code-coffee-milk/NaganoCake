@@ -22,10 +22,14 @@
             <%= "#{current_customer.postal_code} #{current_customer.address}" %><br>
             <%= "#{current_customer.first_name} #{current_customer.last_name}" %>
           </div>
-
+          <% if @shippings != [] %>
+           <%= radio_button_tag :addresses, "shipping_addresses" %>
+              <span>登録済住所から選択</span><br>
+            <%= f.collection_select(:shipping_id, @shippings, :id, :name, prompt: "-- 選択してください --") %>
+          </div>
+         <% end %>
           <div>
             <%= radio_button_tag :addresses, "new_address" %>
-            
             <span>新しいお届け先</span><br>
             <div>
               <%= f.label :"郵便番号(ハイフンなし)" %>
@@ -54,6 +58,7 @@
       <p>お客様のカートに商品はありません。</p>
       <p><%= link_to "商品一覧", customers_products_path, class: "btn btn-warning" %>から商品をお探し下さい。</p>
 <% end %>
+
   </div>
 </div>
 </div>

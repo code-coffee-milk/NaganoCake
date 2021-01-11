@@ -20,8 +20,8 @@
       <div class="card-deck">
         <% @products.each do |product| %>
           <div class="card shadow-lg rounded-circle bg-warning topcardmg">
-            <%= link_to attachment_image_tag(product, :image, size: "120x100", format: 'jpg', fallback: "sweets_colorful_cupcake_blue.png"), customers_products_path(product.id) %>
-            <p class="card-title text-center"><%= link_to product.name, customers_products_path(product.id) %></p>
+            <%= link_to attachment_image_tag(product, :image, size: "120x100", format: 'jpg', fallback: "sweets_colorful_cupcake_blue.png"), customers_product_path(product.id) %>
+            <p class="card-title text-center"><%= link_to product.name, customers_product_path(product.id) %></p>
             <p class="card-text text-center"><%= product.price.to_s(:delimited) %>円</p>
           </div>
         <% end %>

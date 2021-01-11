@@ -3,6 +3,8 @@
   <div class="row">
     <h4 class="ml-3">ショッピングカート</h4>
     <div class="col-10 mx-auto">
+      
+      <% if current_customer.cart_items.present? %>
 <p class="text-right">
  <%= link_to "カートを空にする", cart_items_destroy_all_path, class:"btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 <table class="table table-bordered">
@@ -24,7 +26,10 @@
       <td><%= attachment_image_tag cart_item.product, :image, format: "jpg", size: "80x80" %></td>
       <td><%= cart_item.product.name %></td>
       <td><%= cart_item.product.price.to_s(:delimited) %></td>
-      <td><%= cart_item.quantity %></td>
+      <td>  <%= form_for(cart_item, url: customers_cart_item_path(cart_item), method: :patch , local: true)do |f| %>
+    <%= f.number_field :quantity, class: "quantity", size: 10, min: 1, id: "quantity_cart" %>
+    <%= f.submit "変更", class: "btn btn-info" %>
+  <% end %></td>
       <td><%= (cart_item.product.price*cart_item.quantity).to_s(:delimited) %></td>
       <td><%=link_to "削除する", customers_cart_item_path(cart_item.id), class: "btn btn-danger", method: :delete, "data-confirm" => "削除しますか？" %></td>
     </tr>
@@ -56,6 +61,8 @@
       <%= link_to "情報入力画面へ進む", new_customers_order_path, class:"btn btn-secondary btn-block" %>
         <% end %>
     </div>
-   </div>
-   <p><%= link_to "商品一覧", customers_products_path, class: "btn-link" %>から商品をお探し下さい。</p>
+<% else %>
+      <p>お客様のカートに商品はありません。</p>
+      <p><%= link_to "商品一覧", customers_products_path, class: "btn btn-warning" %>から商品をお探し下さい。</p>
+<% end %>
 </div>

@@ -3,7 +3,8 @@ class Customers::OrdersController < ApplicationController
     include ApplicationHelper
 
   def new
-    @order = Order.new
+    @order = Order.all
+    @shippings = Shipping.all
   end
 
   def create
