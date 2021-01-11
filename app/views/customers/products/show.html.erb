@@ -1,29 +1,27 @@
-<div class="container">
-<%= render "shared/error_messages", resource: @cart_item %>
- <div class="row">
-  <div class="col-xs-12">
-
-   <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '100x100', fallback: "sweets_colorful_cupcake_blue.png" %>
-  <p class=item>商品名：<%= @product.name %></p>
-  <p class=item>商品説明：<%= @product.introduction %></p>
-  <p class=item>価格：<%= @product.price.to_s(:delimited) %></p>
-
-<div class="field">
-        <% if @product.is_active == true %>
-          <% if @product.genre.is_active == true %>
-            <%= form_for(@cart_item , url: customers_cart_items_path, method: :post) do |f| %>
-              <%= f.hidden_field :product_id, value: @product.id %>
-              <%= f.select :quantity, options_for_select((1..10).to_a), include_blank: "個数選択" %>
-              <%= f.submit "カートに入れる", class: "glyphicon glyphicon-shopping-cart btn btn-primary" %>
-            <% end %>
-          <% else %>
-            <h3>売り切れ中</h3>
-          <% end %>
-        <% elsif @product.is_active == false %>
-          <h3>売り切れ中</h3>
+<div class="container m-5">
+  <%= render "shared/error_messages", resource: @cart_item %>
+ <div class="row make">
+  <div class="col-md-5">
+   <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '350x350', fallback: "sweets_colorful_cupcake_blue.png" %>
+  </div>
+  <div class="product_info col-4">
+    <h3><%= @product.name %></h3>
+    <h4><%= @product.introduction %></h4>
+    <label for="inputTaxoutprice"></label>
+    <p>価格：￥<%= @product.price.to_s(:delimited) %></p>
+    <% if @product.is_active == true %>
+      <% if @product.genre.is_active == true %>
+        <%= form_for(@cart_item , url: customers_cart_items_path, method: :post) do |f| %>
+          <%= f.hidden_field :product_id, value: @product.id %>
+          <%= f.select :quantity, options_for_select((1..10).to_a), include_blank: "個数選択" %>
+          <%= f.submit "カートに入れる", class: "glyphicon glyphicon-shopping-cart btn btn-primary" %>
         <% end %>
-      </div>
-
- </div>
+      <% else %>
+      <h3>売り切れ中</h3>
+      <% end %>
+    <% elsif @product.is_active == false %>
+      <h3>売り切れ中</h3>
+    <% end %>
+  </div>
  </div>
 </div>
