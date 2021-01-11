@@ -1,36 +1,56 @@
-<h1>管理者用 Products#index</h1>
-<div class="container">
-<div class="row">
-  <div class="col-xs-12">
-<%= link_to "商品新規投稿", new_admins_product_path %>
-<%= link_to "ジャンル一覧", admins_genres_path %>
-
-<table class="table table-hover table-bordered table-condensed">
-<tr>
-<th>商品ID</th>   
-<th>商品名</th>
-<th>価格</th>
-<th>ジャンル</th>
-<th>ステータス</th>
-</tr>
-
-<% @products.each do |product| %>
-
-<tr>
-<td><%= product.id %></td>    
-<td><%= link_to admins_product_path(product.id) do %><%= product.name %><% end %></td>
-<td><%= product.price %></td>
-<td><%= product.genre.name %></td>
-<td>
-<% if product.is_active == true %>
-<i class="fas fa-bullseye red"></i>販売中
- <% elsif product.is_active == false %>
-  <i class="fas fa-bullseye blue"></i>販売停止中
- <% end %>
- </td>
-</tr>
-
-<% end %>
+<div class="container pt-5">
+ <div class="float-right">
+  <%= link_to new_admins_product_path do %>
+  <h2><i class="fas fa-plus-circle"></i></h2>
+  <% end %>
+ </div>
+ <div class="row">
+  <div class="col-3">
+   <h3 class="text-center bg-light"><strong>商品一覧</strong></h3>
+  </div>
+ </div>
+ <table class="table table-hover">
+   <thead class="bg-light">
+    <tr>
+     <th>商品ID</th>
+     <th>商品名</th>
+     <th>価格</th>
+     <th>ジャンル</th>
+     <th>ステータス</th>
+    </tr>
+   </thead>
+   <% @products.each do |product| %>
+   <tbody>
+    <tr>
+     <td>
+      <%= product.id %>
+     </td>
+     <td class="line">
+      <%= link_to admins_product_path(product.id) do %>
+       <%= product.name %>
+      <% end %>
+     </td>
+     <td>
+      <p><%= product.price %></p>
+     </td>
+     <td>
+      <p><%= product.genre.name %></p>
+     </td>
+     <td>
+      <% if product.is_active == true %>
+       <i class="fas fa-bullseye red"></i>販売中
+      <% elsif product.is_active == false %>
+       <i class="fas fa-bullseye blue"></i>販売停止中
+      <% end %>
+     </td>
+    </tr>
+   </tbody>
+   <% end %>
+  </table>
+  <div class="row">
+    <div class="col-5"></div>
+    <div class="col-2 text-center">
+      <span><%= paginate @products %></span>
     </div>
   </div>
-</div>
+ </div>

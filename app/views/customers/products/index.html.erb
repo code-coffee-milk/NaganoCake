@@ -1,21 +1,33 @@
 <div class="container">
- <div class="row">
-  <div class="col-xs-12"> 
- <h2>商品一覧</h2>
-<div class="clearfix product-box">
-<% @products.each do |product| %>
-
-<%= link_to customers_product_path(product.id), class: "btn-link", :style=>"color:#0099FF;" do %>
- <div id="img_field" class="product">
-  <%= attachment_image_tag(product, :image, size: "150x150", fallback: "sweets_colorful_cupcake_blue.png") %>
- </div>
- <p class="products-name"><%= product.name %></p>
- <% end %>
- <p class="products-price">￥<%= product.price.to_s(:delimited) %></p>
- 
- <% end %>
- </div>
- 
- </div>
- </div>
+  <div class="row">
+    <div class="col">
+      <h2 class="m-4">商品一覧<span>(全<%= @products.count %>件)</span></h2>
+    </div>
+  </div>
+</div>
+<div class="container mb-4">
+  <div class="row mb-2">
+    <% @products.each do |product| %>
+      <div class="col-4 mb-2" style="height: 200px;">
+        <div>
+        <%= link_to customers_product_path(product.id) do %>
+        <%= attachment_image_tag(product, :image, size: "150x150", format: 'jpg', fallback: "sweets_colorful_cupcake_blue.png")%><br>
+        <%= product.name %><br>
+        <% end %>
+        <div>
+        ¥<%= product.price.to_s(:delimited) %>
+        </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div>
+       <%= paginate @products %>
+      </div>
+    </div>
+  </div>
 </div>
