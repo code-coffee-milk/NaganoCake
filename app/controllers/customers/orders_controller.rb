@@ -57,6 +57,14 @@ class Customers::OrdersController < ApplicationController
 	end
 
 	def show
+	  @order = Order.find(params[:id])
+    @order_products = OrderProduct.where(order_id: @order.id)
+    total_price = 0
+    for cart_item in @order_products do
+      product = cart_item.product
+      total_price += product.price * cart_item.quantity
+    end
+    @total_price = total_price
 	end
 
   private
