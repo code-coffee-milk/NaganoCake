@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'customers/orders/comfirm' => 'customers/orders#comfirm',as:'customers_order_comfirm'
   get 'customers/orders/complete' => 'customers/orders#complete',as:'customers_order_complete'
   get 'admins/homes/top' => 'admins/homes#top'
-  patch 'admins/order_details/:id' => 'admins/order_products#update'
+  patch 'admins/order_details/:id' => 'admins/order_products#update',as:'order_products'
 
   devise_for :customers, controllers: {
     sessions:      'customer_devises/sessions',
