@@ -14,7 +14,7 @@
              <tbody>
              	<% @cart_items.each do |cart_item| %>
              	<tr>
-             	<td><%= attachment_image_tag cart_item.product, :image, :fill, 50, 50,format: "jpg", fallback: "sweets_colorful_cupcake_blue.png",size:'50x50'  %>
+             	<td><%= attachment_image_tag cart_item.product, :image, :fill, 50, 50, format: "jpg", fallback: "sweets_colorful_cupcake_blue.png", size: "50x50" %>
              	    <%= cart_item.product.name %>
              	</td>
              	<td><%= cart_item.product.price.to_s(:delimited) %></td>
@@ -29,7 +29,7 @@
       	<table class="table table-bordered">
       	  <tr><th>送料</th><td>800</td></tr>
           <tr><th>商品合計</th><td><%= @total_price.to_s(:delimited) %></td></tr>
-          <tr><th>請求金額</th><td><%= (800+@total_price).to_s(:delimited) %></td></tr>
+          <tr><th>請求金額</th><td><%= (800 + @total_price).to_s(:delimited) %></td></tr>
       	</table>
     	</div>
 	</div>
@@ -50,7 +50,7 @@
     	    </div>
     	  </div>
     	  <div class="row">
-    	    <%= form_with model: @order, url: customers_orders_path, method: :post, local:true  do |f| %>
+    	    <%= form_with model: @order, url: customers_orders_path, method: :post, local: true do |f| %>
     	      <%= f.hidden_field :shipping_street_adress, value: @order.shipping_street_adress %>
     	      <%= f.hidden_field :shipping_postal_code, value: @order.shipping_postal_code %>
     	      <%= f.hidden_field :method_of_payment, value: @order.method_of_payment %>
