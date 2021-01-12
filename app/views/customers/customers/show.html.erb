@@ -1,7 +1,9 @@
 <div class= "container">
   <h3>マイページ</h3>
   <div class="row px-4 py-4">
-    <h4>登録情報</h4>
+    <div class="my-page-label">
+      <h4>登録情報</h4>
+    </div>
     <div class="actions px-2">
      <%= link_to "編集する", edit_customers_customer_path(@customer),class: "btn btn-success" %>
     </div>
@@ -34,16 +36,20 @@
       </tr>
     </tbody>
   </table>
-  　<div class="row px-4 py-2">
+  <div class="row px-4 py-4">
+    <div class="my-page-label">
       <h4>配送先</h4>
-      <div class="actions px-2">
-      <%= link_to "一覧を見る", customers_shippings_path,class: "btn btn-primary" %>
-      </div>
     </div>
-      <div class="row px-4 py-4">
-        <h4>注文履歴</h4>
-        <div class="actions px-2">
-        <%= link_to "一覧を見る", customers_orders_path,class: "btn btn-primary" %>
-        </div>
-      </div>
+    <div class="actions px-2">
+    <%= link_to "一覧を見る", customers_shippings_path,class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="row px-4 py-4">
+    <div class="my-page-label">
+      <h4>注文履歴</h4>
+    </div>
+    <div class="actions px-2">
+    <%= link_to "一覧を見る", customers_orders_path,class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>
