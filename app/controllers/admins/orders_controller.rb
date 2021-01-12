@@ -16,18 +16,20 @@ class Admins::OrdersController < ApplicationController
  end
 
 	def show
-		@order = Order.find(params[:id])
-		@order_products = @order.order_products
+	  @order = Order.find(params[:id])
+    @order_products = OrderProduct.where(order_id: @order.id)
+    total_price = 0
+    for cart_item in @order_products do
+      product = cart_item.product
+      total_price += product.price * cart_item.quantity
+    end
+    @total_price = total_price
 	end
 
 	def update
 		@order = Order.find(params[:id])
-		if @order.update(order_params)
-		 flash[:success] = "注文ステータスを変更しました"
-		 redirect_to admin_order_path(@order)
-		else
-		 render "show"
-		end
+		@order.update(order_params)
+		redirect_to admins_order_path(@order)
 	end
 
 	private
