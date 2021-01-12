@@ -7,11 +7,11 @@
       <%= form_with model: @order, url: customers_order_comfirm_path, local: true do |f| %>
         <h5 style="font-weight:bold">支払い方法</h5>
           <div>
-            <%= f.radio_button :method_of_payment, :"0", checked: true %>
+            <%= f.radio_button :method_of_payment, :"クレジットカード", checked: true %>
             <span>クレジットカード</span>
           </div>
           <div>
-            <%= f.radio_button :method_of_payment, :"1" %>
+            <%= f.radio_button :method_of_payment, :"銀行振込" %>
             <span>銀行振込</span>
           </div>
 

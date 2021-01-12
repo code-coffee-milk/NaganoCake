@@ -36,11 +36,7 @@
 	    	<div class="row">
     	    <h4>支払方法</h4>
     	    <div>
-    	      <% if @order.method_of_payment == 0 %>
-    	        <p class="ml-3">クレジットカード</p>
-    	      <% elsif @order.method_of_payment == 1 %>
-    	        <p class="ml-3">銀行振込</p>
-    	      <% end %>
+    	      <p class="ml-3"><%= @order.method_of_payment  %></p>
     	    </div>
     	  </div>
     	  <div class="row">
