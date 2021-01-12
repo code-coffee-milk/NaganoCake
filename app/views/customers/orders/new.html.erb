@@ -5,13 +5,14 @@
     <% if current_customer.cart_items.present? %>
     <div>
       <%= form_with model: @order, url: customers_order_comfirm_path, local: true do |f| %>
+        <%= render "shared/error_messages", resource: @order %>
         <h5 style="font-weight:bold">支払い方法</h5>
           <div>
-            <%= f.radio_button :method_of_payment, :"0", checked: true %>
+            <%= f.radio_button :method_of_payment, :"クレジットカード", checked: true %>
             <span>クレジットカード</span>
           </div>
           <div>
-            <%= f.radio_button :method_of_payment, :"1" %>
+            <%= f.radio_button :method_of_payment, :"銀行振込" %>
             <span>銀行振込</span>
           </div>
 
@@ -19,7 +20,7 @@
           <div>
             <%= radio_button_tag :address, "address", checked: true %>
             <span>ご自身の住所</span><br>
-            <%= "#{current_customer.postal_code} #{current_customer.address}" %><br>
+            〒<%= "#{current_customer.postal_code} #{current_customer.address}" %><br>
             <%= "#{current_customer.first_name} #{current_customer.last_name}" %>
           </div>
           <div style="display:block", class="mt-2">

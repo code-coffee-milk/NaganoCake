@@ -4,6 +4,7 @@
       <h3 class="bg-light m-5"><strong>商品新規登録</strong></h3>
     </div>
   </div>
+  <%= render "shared/error_messages", resource: @product %>
   <div class="row">
     <div class="mx-auto">
         <%= form_with model: @product, url: admins_products_path, local:true do |f| %>
