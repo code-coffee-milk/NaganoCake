@@ -2,6 +2,9 @@ class Order < ApplicationRecord
 
 	belongs_to :customer
 	has_many :order_products, dependent: :destroy
+  validates :shipping_postal_code, format: { with: /\A\d{7}\z/ }
+  validates :shipping_street_adress, presence: true
+  validates :shipping_name, presence: true
 
   def full_address
     return "〒" + self.shipping_postal_code + " " + self.shipping_street_adress

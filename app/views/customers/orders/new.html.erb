@@ -5,6 +5,7 @@
     <% if current_customer.cart_items.present? %>
     <div>
       <%= form_with model: @order, url: customers_order_comfirm_path, local: true do |f| %>
+        <%= render "shared/error_messages", resource: @order %>
         <h5 style="font-weight:bold">支払い方法</h5>
           <div>
             <%= f.radio_button :method_of_payment, :"クレジットカード", checked: true %>
