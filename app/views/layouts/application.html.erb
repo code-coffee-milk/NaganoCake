@@ -23,7 +23,9 @@
         <% end %>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-
+          
+         
+         
         <% if customer_signed_in? %>
           <li><%= link_to "マイページ", customers_customer_path(current_customer.id), class: 'btn btn-secondary' %></li>
           <li><%= link_to "商品一覧", customers_products_path, class: 'btn btn-secondary' %></li>

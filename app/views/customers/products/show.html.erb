@@ -8,7 +8,7 @@
     <h3><%= @product.name %></h3>
     <h4><%= @product.introduction %></h4>
     <label for="inputTaxoutprice"></label>
-    <p>価格：￥<%= @product.price.to_s(:delimited) %></p>
+    <h4>価格：￥ <%= (((@product.price*1.1).round(2)).ceil).to_s(:delimited) %>(税込)</h4>
     <% if @product.is_active == true %>
       <% if @product.genre.is_active == true %>
         <%= form_for(@cart_item , url: customers_cart_items_path, method: :post) do |f| %>
