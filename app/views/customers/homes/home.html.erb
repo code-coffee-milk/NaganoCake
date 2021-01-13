@@ -21,12 +21,12 @@
       <h3>新着商品</h3>
       <div class="row">
         <% @products.each do |product| %>
-      <div class="new_item"> 
+      <div class="new_item">
         <%= link_to customers_product_path(product.id) do %>
         <%= attachment_image_tag(product, :image, size: "120x100", format: 'jpg', fallback: "sweets_colorful_cupcake_blue.png")%><br>
         <%= product.name %><br>
         <% end %>
-        ¥<%= product.price.to_s(:delimited) %>
+      ¥<%= product.price.to_s(:delimited) %>
       </div>
         <% end %>
       </div>
