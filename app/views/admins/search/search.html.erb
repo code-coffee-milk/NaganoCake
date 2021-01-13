@@ -1,0 +1,21 @@
+<h1>Search#search</h1>
+<p>Find me in app/views/search/search.html.erb</p>
+<div class="container">
+<h1>検索結果</h1>
+
+<% if @model == 'customer' %>
+   <h3>【Customerの検索結果】検索ワード：<%= @content %></h3>
+   
+    <% @datas.each do |data| %>
+    <li><%= link_to data.last_name ,admins_customer_path(data) %></li>
+    <% end %>
+
+<% else @model == 'products' %>
+
+  <h3>【Productの検索結果】検索ワード：<%= @content %></h3>
+
+    <% @datas.each do |data| %>
+     <li><%= link_to data.name ,admins_product_path(data) %></li>
+    <% end %>
+<% end %>
+</div>

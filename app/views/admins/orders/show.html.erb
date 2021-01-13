@@ -59,9 +59,9 @@
           <% @order_products.each do |order_product| %>
             <tr></tr>
               <td class="text-left align-middle"><%= order_product.product.name %></td>
-              <td class="align-middle"><%= order_product.product.price.to_s(:delimited) %></td>
+              <td class="align-middle"><%= (((order_product.product.price*1.1).round(2)).ceil).to_s(:delimited) %></td>
               <td class="align-middle"><%= order_product.quantity %></td>
-              <td class="align-middle"><%= (order_product.product.price * order_product.quantity).to_s(:delimited) %></td>
+              <td class="align-middle"><%= ((((order_product.product.price*1.1) * order_product.quantity).round(2)).ceil).to_s(:delimited) %></td>
               <td class="align-middle">
                 <%= form_for(order_product, url: order_products_path(order_product), method: :patch) do |f| %>
                   <%= f.select :status, OrderProduct.statuses.keys, class: "order_status" %>
@@ -80,7 +80,7 @@
         <tbody>
           <tr>
             <th>商品合計</th>
-            <td><%= @total_price.to_s(:delimited) %>円</td>
+            <td><%= ((@total_price.round(2)).ceil).to_s(:delimited) %>円</td>
           </tr>
           <tr>
             <th>送料</th>
@@ -88,7 +88,7 @@
           </tr>
           <tr>
             <th>請求金額合計</th>
-            <td><b><%= (800+@total_price).to_s(:delimited) %>円</b></td>
+            <td><b><%= (((800+@total_price).round(2)).ceil).to_s(:delimited) %>円</b></td>
           </tr>
         </tbody>
       </table>
