@@ -10,7 +10,6 @@
 <table class="table table-bordered">
   <thead class="thead-light">
     <tr>
-      <th></th>
       <th>商品名</th>
       <th>単価(税込)</th>
       <th>数量</th>
@@ -23,10 +22,9 @@
     <% @cart_items.each do |cart_item| %>
 
     <tr>
-      <td><%= attachment_image_tag cart_item.product, :image, format: "jpg", size: "80x80" %></td>
-      <td><%= cart_item.product.name %></td>
+      <td><%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '50x50', fallback: "sweets_colorful_cupcake_blue.png" %><%= cart_item.product.name %></td>
       <td><%= (((cart_item.product.price*1.1).round(2)).ceil).to_s(:delimited) %></td>
-      <td>  <%= form_for(cart_item, url: customers_cart_item_path(cart_item), method: :patch , local: true)do |f| %>
+      <td><%= form_for(cart_item, url: customers_cart_item_path(cart_item), method: :patch , local: true)do |f| %>
     <%= f.number_field :quantity, class: "quantity", size: 10, min: 1, id: "quantity_cart" %>
     <%= f.submit "変更", class: "btn btn-info" %>
   <% end %></td>
