@@ -21,7 +21,7 @@ class Admins::OrdersController < ApplicationController
     total_price = 0
     for cart_item in @order_products do
       product = cart_item.product
-      total_price += product.price * cart_item.quantity
+      total_price += (product.price*1.1) * cart_item.quantity
     end
     @total_price = total_price
 	end

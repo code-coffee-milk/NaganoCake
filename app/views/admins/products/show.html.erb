@@ -20,8 +20,8 @@
     <%= @product.genre.name %>
    </div>
    <div>
-    <label>価格：</label>
-    <%= @product.price %>
+    <label>価格（税込価格）：</label>
+    <%= @product.price.to_s(:delimited) %>(<%= (((@product.price*1.1).round(2)).ceil).to_s(:delimited) %>)円
    </div>
    <div>
     <label>販売ステータス：</label>

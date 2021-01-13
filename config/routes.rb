@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'admins/search/search'
   root to: 'customers/homes#home'
   get 'home/about' => 'customers/homes#about'
   get 'customers/unsubscribe' => 'customers/customers#unsubscribe'

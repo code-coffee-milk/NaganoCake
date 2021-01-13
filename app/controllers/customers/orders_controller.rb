@@ -29,7 +29,7 @@ class Customers::OrdersController < ApplicationController
     total_price = 0
     for cart_item in @cart_items do
       product = cart_item.product
-      total_price += product.price * cart_item.quantity
+      total_price += (product.price*1.1) * cart_item.quantity
     end
     @total_price = total_price
     @order = current_customer.orders.new(order_params)
@@ -67,7 +67,7 @@ class Customers::OrdersController < ApplicationController
     total_price = 0
     for cart_item in @order_products do
       product = cart_item.product
-      total_price += product.price * cart_item.quantity
+      total_price += (product.price*1.1) * cart_item.quantity
     end
     @total_price = total_price
 	end
