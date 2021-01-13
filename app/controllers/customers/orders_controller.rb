@@ -3,8 +3,8 @@ class Customers::OrdersController < ApplicationController
     include ApplicationHelper
 
   def new
-    @order = Order.all
-    @shippings = Shipping.where(customer: current_customer)
+    @order = Order.new
+    @shippings = Shipping.all
   end
 
   def create
@@ -26,6 +26,12 @@ class Customers::OrdersController < ApplicationController
 
   def comfirm
     @cart_items = current_customer.cart_items
+    total_price = 0
+    for cart_item in @cart_items do
+      product = cart_item.product
+      total_price += product.price * cart_item.quantity
+    end
+    @total_price = total_price
     @order = current_customer.orders.new(order_params)
     address = params[:address]
     case address
@@ -40,13 +46,12 @@ class Customers::OrdersController < ApplicationController
         @order.shipping_street_adress = shipping.address
         @order.shipping_name = shipping.name
     end
-    total_price = 0
-    for cart_item in @cart_items do
-      product = cart_item.product
-      total_price += product.price * cart_item.quantity
+    if @order.valid?
+      render "customers/orders/comfirm"
+    else
+      @shippings = Shipping.all
+      render "customers/orders/new"
     end
-    @total_price = total_price
-    render "customers/orders/comfirm"
   end
 
 	def complete
@@ -57,6 +62,14 @@ class Customers::OrdersController < ApplicationController
 	end
 
 	def show
+	  @order = Order.find(params[:id])
+    @order_products = OrderProduct.where(order_id: @order.id)
+    total_price = 0
+    for cart_item in @order_products do
+      product = cart_item.product
+      total_price += product.price * cart_item.quantity
+    end
+    @total_price = total_price
 	end
 
   private
