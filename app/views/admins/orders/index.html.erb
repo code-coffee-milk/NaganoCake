@@ -1,6 +1,6 @@
 <div class="container">
 <h3>注文履歴一覧</h3>
-		<table class="table table-sm">
+		<table class="table">
 		  <thead>
 		    <tr>
 		      <th scope="col">購入日時</th>
@@ -24,19 +24,9 @@
 		          <%= order.total_count %>
 		        </td>
   	        <td>
-  		          <% if order.status == 0 %>
-  		            <p>入金待ち</p>
-  		          <% elsif order.status == 1 %>
-  		            <p>入金確認</p>
-  		          <% elsif order.status == 2 %>
-  		            <p>製作中</p>
-  		          <% elsif order.status == 3 %>
-  		            <p>発送準備中</p>
-  		          <% elsif order.status == 4 %>
-  		            <p>発送済み</p>
-  		          <% end %>
-  		        </td>
-     	      </tr>
+  	        	<%= order.status %>
+  		      </td>
+     	    </tr>
 		    <% end %>
 		  </tbody>
 		</table>
