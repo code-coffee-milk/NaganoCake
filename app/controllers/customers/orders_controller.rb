@@ -4,7 +4,7 @@ class Customers::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @shippings = Shipping.all
+    @shippings = Shipping.where(customer: current_customer)
   end
 
   def create
@@ -49,11 +49,11 @@ class Customers::OrdersController < ApplicationController
     if @order.valid?
       render "customers/orders/comfirm"
     else
-      @shippings = Shipping.all
+      @shippings = Shipping.where(customer: current_customer)
       render "customers/orders/new"
     end
   end
-  
+
 	def complete
 	end
 
