@@ -53,7 +53,7 @@ class Customers::OrdersController < ApplicationController
       render "customers/orders/new"
     end
   end
-
+  
 	def complete
 	end
 
