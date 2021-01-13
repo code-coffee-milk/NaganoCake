@@ -1,25 +1,25 @@
 <div class="container">
   <div class="row">
     <div class="main-visual">
-      <%= image_tag 'top2.jpg', size: '1150x300', style: 'background-image'%>
+      <%= image_tag 'top2-1.jpg', size: '1150x300', style: 'background-image'%>
     </div>
-    <div class='mx-auto'>
-        <div class="home_text">
+      <div class="col-sm-12 text-center pt-3">
+        <h4>
           ようこそ、ながのCAKEへ！</br>
           このサイトは、ケーキ販売のECサイトになります。</br>
           会員でない方も商品の閲覧はできますが、</br>
           購入には会員登録が必要になります。
-        </div>
-    </div>
+        </h4>
+      </div>
   </div>
 </div>
 
 
-<div calss="container">
+<div calss="container mt-2">
   <div class="row d-flex justify-content-center align-items-center">
-    <div class="col-auto">
-      <h2>新着商品</h2>
-      <div class="row mt-2">
+    <div class="col-auto mt-5">
+      <h3>新着商品</h3>
+      <div class="row">
         <% @products.each do |product| %>
       <div class="new_item"> 
         <%= link_to customers_product_path(product.id) do %>
@@ -40,4 +40,4 @@
     </p>
   </div>
 </div>
-<p></p><%= link_to "管理者ログイン", new_admin_session_path, class: 'btn btn-secondary' %>
+<p><%= link_to "管理者ログイン", new_admin_session_path, class: 'btn btn-secondary' %></p>
