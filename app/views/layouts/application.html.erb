@@ -45,10 +45,9 @@
         </div>
       </div>
     </nav>
-  </header>
-  <body>
+  
     <% if admin_signed_in? %>
-       <div class="search-form">
+       <div class="text-center">
       <%= form_with url: admins_search_search_path, method: :get, local: true do |f| %>
         <%= text_field_tag 'search[content]' %>
         <%= select_tag 'search[model]', options_for_select({ "Customer" => "costomre", "Product" => "product" }) %>
@@ -57,7 +56,8 @@
       <% end %>
     </div>
    <% end %>
-   
+   </header>
+     <body>
   <%= yield %>
 
   </body>
