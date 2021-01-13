@@ -1,7 +1,11 @@
 class Admins::OrdersController < ApplicationController
 
  def index
-  @orders = Order.all.page(params[:page]).per(10)
+  if params[:id].nil?
+   @orders = Order.all.page(params[:page]).per(10)
+  else
+   @orders = Order.where(customer_id: params[:id]).page(params[:page]).per(10)
+  end
  end
 
  def current_index
