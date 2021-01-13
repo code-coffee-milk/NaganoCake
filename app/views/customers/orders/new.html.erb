@@ -21,7 +21,7 @@
             <%= radio_button_tag :address, "address", checked: true %>
             <span>ご自身の住所</span><br>
             〒<%= "#{current_customer.postal_code} #{current_customer.address}" %><br>
-            <%= "#{current_customer.first_name} #{current_customer.last_name}" %>
+            <%= "#{current_customer.last_name} #{current_customer.first_name}" %>
           </div>
           <div style="display:block", class="mt-2">
           <% if @shippings != [] %>
