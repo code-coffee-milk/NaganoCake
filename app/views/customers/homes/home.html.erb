@@ -23,7 +23,7 @@
         <% @products.each do |product| %>
       <div class="new_item">
         <%= link_to customers_product_path(product.id) do %>
-        <%= attachment_image_tag(product, :image, size: "120x100", format: 'jpg', fallback: "sweets_colorful_cupcake_blue.png")%><br>
+        <%= attachment_image_tag(product, :image, size: "120x100", format: 'jpg', fallback: "no-image.jpg")%><br>
         <%= product.name %><br>
         <% end %>
       ¥<%= product.price.to_s(:delimited) %>

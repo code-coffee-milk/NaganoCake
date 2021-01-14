@@ -26,7 +26,7 @@
           <% @cart_items.each do |cart_item| %>
             <tr>
               <td>
-                <%= attachment_image_tag cart_item.product, :image, format: "jpg", size: "50x50" ,fallback: "sweets_colorful_cupcake_blue.png" %>
+                <%= attachment_image_tag cart_item.product, :image, format: "jpg", size: "50x50" ,fallback: "no-image.jpg" %>
               </td>
               <td>
                 <%= cart_item.product.name %>
