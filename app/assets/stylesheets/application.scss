@@ -1,0 +1,107 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap";
+ @import 'font-awesome-sprockets';
+ @import 'font-awesome';
+
+.sing-up-label {
+  width: 200px;
+}
+
+.sign-up-input-label {
+  width: 64px;
+}
+
+.sing-in-label {
+  width: 200px;
+}
+
+.new_customer {
+  display: flex;
+  justify-content: center;
+}
+
+.home_text {
+ padding: 80px 0px;
+ color: black;
+}
+
+li {
+ margin-right: 50px;
+}
+
+.table {
+  margin-top: 30px;
+}
+
+.paginate {
+  margin-left: 462px;
+}
+
+.user-table {
+  width: 400px;
+}
+
+.edit-label {
+  width: 200px;
+}
+
+.edit-input {
+  margin-left: 50px;
+}
+
+.shipping-new-label {
+  width: 200px;
+}
+
+.shipping-new-input {
+  margin-left: 50px;
+}
+
+.shipping-edit-label {
+  width: 200px;
+}
+
+.shipping-edit-input {
+  margin-left: 50px;
+}
+
+.shipping-table {
+  table-layout: fixed;
+}
+
+.shipping-table-postal-code {
+  width: 100px;
+}
+
+.shipping-table-address {
+}
+
+.shipping-table-name {
+  width: 160px;
+}
+
+.shipping-table-button {
+  width: 220px;
+}
+
+.new_item {
+  margin: 50px;
+}
+
+.my-page-label {
+  width: 140px;
+}

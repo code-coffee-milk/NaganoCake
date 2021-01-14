@@ -1,0 +1,97 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <h3 class="text-center bg-light"><strong>注文履歴詳細</strong></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <table class="table table-borderless">
+        <tr>
+          <th>購入者</th>
+          <td>
+            <%= link_to admins_customer_path(@order.customer.id) do %>
+              <%= @order.customer.full_name %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+            <th>注文日時</th>
+            <td><%= @order.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M:%S') %></td>
+          </tr>
+        <tr>
+          <th>配送先</th>
+          <td><%= @order.full_address %>
+              <br><%= @order.shipping_name %></td>
+        </tr>
+        <tr>
+          <th>支払い方法</th>
+          <td><%= @order.method_of_payment %></td>
+        </tr>
+        <tr>
+          <th>注文ステータス</th>
+          <td>
+            <%= form_with model: @order, url: admins_order_path, method: :patch, local: true do |f| %>
+            <%= f.select :status, options_for_select(Order.statuses.keys, selected: @order.status), :class => "form-control" %>
+            <%= f.submit "更新", :class => "btn btn-primary btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <br>
+  <div class="row justify-content-between">
+    <div class="col-8 ordershow text-center">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th class="text-left">商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>製作ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_products.each do |order_product| %>
+            <tr></tr>
+              <td class="text-left align-middle"><%= order_product.product.name %></td>
+              <td class="align-middle"><%= (((order_product.product.price*1.1).round(2)).ceil).to_s(:delimited) %></td>
+              <td class="align-middle"><%= order_product.quantity %></td>
+              <td class="align-middle"><%= ((((order_product.product.price*1.1) * order_product.quantity).round(2)).ceil).to_s(:delimited) %></td>
+              <td class="align-middle">
+                <%= form_for(order_product, url: order_products_path(order_product), method: :patch) do |f| %>
+                  <%= f.select :status, OrderProduct.statuses.keys, class: "order_status" %>
+              </td>
+              <td>
+                  <%= f.submit "更新", :class => "btn btn-primary btn-sm" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3 align-self-end">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <th>商品合計</th>
+            <td><%= ((@total_price.round(2)).ceil).to_s(:delimited) %>円</td>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <td>800円</td>
+          </tr>
+          <tr>
+            <th>請求金額合計</th>
+            <td><b><%= (((800+@total_price).round(2)).ceil).to_s(:delimited) %>円</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

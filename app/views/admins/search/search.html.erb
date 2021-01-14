@@ -1,0 +1,34 @@
+
+<div class="container">
+<h2>検索結果</h2>
+
+<% if @model == 'customer' %>
+   <h3>【Customerの検索結果】検索ワード：<%= @content %></h3>
+   
+    <% @datas.each do |data| %>
+    <li><%= link_to data.last_name ,admins_customer_path(data) %></li>
+    <% end %>
+
+<% else @model == 'products' %>
+
+  <h3>【Productの検索結果】検索ワード：<%= @content %></h3>
+  <table class="table table-hover">
+   <thead class="bg-light">
+    <tr>
+     <th>商品ID</th>
+     <th>商品名</th>
+     <th>税抜価格</th>
+     <th>ジャンル</th>
+    </tr>
+   </thead>
+   <% @datas.each do |data| %>
+    <tr>
+     <td><%= data.id %></td>
+     <td><%= link_to data.name ,admins_product_path(data) %></td>
+     <td><%= data.price %></td>     
+     <td><%= data.genre.name %></td>
+     </tr>
+    <% end %>
+    </table>
+<% end %>
+</div>
