@@ -1,11 +1,16 @@
-<div class="container">
-<h3>注文履歴一覧</h3>
-<div class="row">
-  <div class="col-xs-12">
-      <% if @orders.present? %>
-        <table class="table table-hover table-bordered table-condensed">
-          <thead>
-            <tr class="info">
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-3">
+      <h3 class="text-center bg-light"><strong>注文履歴一覧</strong></h3>
+    </div>
+  </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <% if @orders.present? %>
+        <table class ="table table-bordered">
+          <thead class="bg-light">
+            <tr>
               <th>注文日</th>
               <th>配送先</th>
               <th>注文商品</th>
@@ -17,35 +22,29 @@
           <tbody>
             <% @orders.each do |order| %>
               <tr>
+                <td><%= order.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M:%S') %></td>
                 <td>
-    		          <%= order.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d") %>
-    		        </td>
-    		        <td>
-    		          〒<%= order.shipping_postal_code %><br>
-    		          <%= order.shipping_street_adress %><br>
-    		          <%= order.shipping_name %>
-    		        </td>
-    		        <td>
-    		          <% order.order_products.each do |product| %>
-    		          <p><%= product.product.name %></p>
-    		          <% end %>
-    		        </td>
-    		        <td>
-    		          <%= ((((order.total_payment*1.1)-80).round(2)).ceil).to_s(:delimited) %>円
-    		        </td>
-    		        <td>
-                  <%= order.status %>
-    		        </td>
-         	      <td>
-       	          <%= link_to "注文詳細", customers_order_path(order), class: "glyphicon glyphicon-zoom-in btn btn-primary" %>
-       	        </td>
+                  〒<%= order.shipping_postal_code %><br>
+                  <%= order.shipping_street_adress %><br>
+                  <%= order.shipping_name %>
+                  </td>
+                <td>
+                  <% order.order_products.each do |product| %>
+                    <li><%= product.product.name %></li>
+                  <% end %>
+                </td>
+                <td class="text-right"><%= order.total_payment.to_s(:delimited) %>円</td>
+                <td><%= order.status %></td>
+                <td class="text-center">
+                <%= link_to "表示する", customers_order_path(order), class: "btn btn-primary btn-sm" %>
+                </td>
               </tr>
             <% end %>
           </tbody>
         </table>
-      <% else %>
-        <p>注文履歴がありません。</p>
-      <% end %>
+        <% else %>
+          <p>注文履歴がありません。</p>
+        <% end %>
+      </div>
     </div>
-</div>
 </div>
