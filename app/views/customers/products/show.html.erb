@@ -2,7 +2,7 @@
   <%= render "shared/error_messages", resource: @cart_item %>
  <div class="row make">
   <div class="col-md-5">
-   <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '350x350', fallback: "sweets_colorful_cupcake_blue.png" %>
+   <%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg', size: '350x350', fallback: "no-image.jpg" %>
   </div>
   <div class="product_info col-4">
     <h3><%= @product.name %></h3>
