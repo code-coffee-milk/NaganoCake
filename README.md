@@ -1,25 +1,12 @@
-# README
+##チーム開発
+NaganoCake
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ER図
+https://drive.google.com/drive/my-drive
 
-Things you may want to cover:
+テーブル定義書
+https://docs.google.com/spreadsheets/d/1g_wpy7kkZZR_QR7UqEvVauOP6h8JkBa2d-zRDL_d-GY/edit#gid=0
 
-* Ruby version
+アプリケーション詳細設計
+https://docs.google.com/spreadsheets/d/17TAr2HJVt8yyF2RqjOCqMJyUHGLbSEYSJcoNuPb3GjM/edit#gid=933561893
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-あああ
